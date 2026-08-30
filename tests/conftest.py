@@ -8,7 +8,7 @@ from fastapi import FastAPI
 
 from fopost_fastapi import FoPostSettings, install_exception_handlers, setup_fopost
 
-BASE_URL = "https://api.test.fopost.com/api/v1"
+BASE_URL = "https://api.test.fopost.com/v1"
 API_KEY = "fp_test_key"
 WEBHOOK_SECRET = "whsec_test"
 

@@ -8,7 +8,7 @@ from fopost_fastapi import FoPostSettings
 
 def test_settings_read_from_the_environment(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("FOPOST_API_KEY", "fp_from_env")
-    monkeypatch.setenv("FOPOST_BASE_URL", "https://api.staging.fopost.com/api/v1")
+    monkeypatch.setenv("FOPOST_BASE_URL", "https://api.staging.fopost.com/v1")
     monkeypatch.setenv("FOPOST_TIMEOUT", "12.5")
     monkeypatch.setenv("FOPOST_MAX_RETRIES", "5")
     monkeypatch.setenv("FOPOST_DEFAULT_WORKSPACE_ID", "ws_env")
@@ -17,7 +17,7 @@ def test_settings_read_from_the_environment(monkeypatch: pytest.MonkeyPatch) -> 
     settings = FoPostSettings(_env_file=None)
 
     assert settings.api_key == "fp_from_env"
-    assert settings.base_url == "https://api.staging.fopost.com/api/v1"
+    assert settings.base_url == "https://api.staging.fopost.com/v1"
     assert settings.timeout == 12.5
     assert settings.max_retries == 5
     assert settings.default_workspace_id == "ws_env"
