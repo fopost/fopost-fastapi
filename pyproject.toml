@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fopost-fastapi"
+version = "0.1.0"
+description = "Official FastAPI integration for the FoPost API. Dependency injection, settings, webhooks, and error handling on top of the fopost SDK."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "FoPost, Porter Bridge, LLC" }]
+keywords = [
+  "fopost",
+  "fastapi",
+  "social-media",
+  "publishing",
+  "scheduling",
+  "webhooks",
+  "api",
+  "sdk",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Framework :: FastAPI",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Internet :: WWW/HTTP",
+  "Typing :: Typed",
+]
+dependencies = [
+  "fopost>=0.1,<1.0",
+  "fastapi>=0.110",
+  "pydantic>=2",
+  "pydantic-settings>=2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "httpx>=0.27",
+  "ruff>=0.6",
+  "mypy>=1.11",
+]
+
+[project.urls]
+Homepage = "https://fopost.com"
+Documentation = "https://fopost.com/docs"
+Repository = "https://github.com/fopost/fopost-fastapi"
+Issues = "https://github.com/fopost/fopost-fastapi/issues"
+Support = "https://fopost.com/contact"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fopost_fastapi"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/fopost_fastapi", "tests", "examples", "README.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["fopost_fastapi", "tests"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src/fopost_fastapi"]
