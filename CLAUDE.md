@@ -75,7 +75,7 @@ mock transport. Production callers leave it unset.
 
 The bits that matter here (the full contract is `fopost-python`'s):
 
-- Base URL `https://api.fopost.com/api/v1`, auth header **`X-API-Key`** (not Bearer)
+- Base URL `https://api.fopost.com/v1`, auth header **`X-API-Key`** (not Bearer)
 - Error envelope `{"error": "<machine code>", "message": "<human text>"}`; 402 may carry
   `upgrade_url`, 429 carries `Retry-After`
 - Retries (3 attempts, honouring `Retry-After`) happen inside `fopost`. Never add a retry loop here

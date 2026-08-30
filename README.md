@@ -58,7 +58,7 @@ app = FastAPI(lifespan=fopost_lifespan())
 | Field | Environment variable | Default |
 | :--- | :--- | :--- |
 | `api_key` | `FOPOST_API_KEY` | — (required) |
-| `base_url` | `FOPOST_BASE_URL` | `https://api.fopost.com/api/v1` |
+| `base_url` | `FOPOST_BASE_URL` | `https://api.fopost.com/v1` |
 | `timeout` | `FOPOST_TIMEOUT` | `30.0` seconds |
 | `max_retries` | `FOPOST_MAX_RETRIES` | `3` attempts |
 | `default_workspace_id` | `FOPOST_DEFAULT_WORKSPACE_ID` | — |
@@ -69,7 +69,7 @@ Create an API key at <https://app.fopost.com/api-keys>. It is sent as `X-API-Key
 Pass settings explicitly when you would rather not read the environment:
 
 ```python
-setup_fopost(app, FoPostSettings(api_key="fp_...", base_url="https://api.fopost.com/api/v1"))
+setup_fopost(app, FoPostSettings(api_key="fp_...", base_url="https://api.fopost.com/v1"))
 ```
 
 `FoPostSettingsDep` injects the resolved settings into a route, which is how you reach
