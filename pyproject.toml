@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "fopost-fastapi"
-version = "0.1.0"
+version = "0.1.1"
 description = "Official FastAPI integration for the FoPost API. Dependency injection, settings, webhooks, and error handling on top of the fopost SDK."
 readme = "README.md"
 license = "MIT"
