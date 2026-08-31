@@ -64,7 +64,7 @@ app = FastAPI(lifespan=fopost_lifespan())
 | `default_workspace_id` | `FOPOST_DEFAULT_WORKSPACE_ID` | — |
 | `webhook_secret` | `FOPOST_WEBHOOK_SECRET` | — |
 
-Create an API key at <https://app.fopost.com/api-keys>. It is sent as `X-API-Key`.
+Create an API key at <https://fopost.com/dashboard/api-keys>. It is sent as `X-API-Key`.
 
 Pass settings explicitly when you would rather not read the environment:
 

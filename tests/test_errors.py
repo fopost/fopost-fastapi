@@ -52,7 +52,7 @@ def test_payment_required_keeps_the_upgrade_url(make_app: Callable[..., FastAPI]
             {
                 "error": "subscription_required",
                 "message": "No active subscription",
-                "upgrade_url": "https://app.fopost.com/billing",
+                "upgrade_url": "https://fopost.com/dashboard/billing",
             },
         ),
     )
@@ -61,7 +61,7 @@ def test_payment_required_keeps_the_upgrade_url(make_app: Callable[..., FastAPI]
         response = client.get("/labels")
 
     assert response.status_code == 402
-    assert response.json()["upgrade_url"] == "https://app.fopost.com/billing"
+    assert response.json()["upgrade_url"] == "https://fopost.com/dashboard/billing"
 
 
 def test_not_found_passes_the_status_through(make_app: Callable[..., FastAPI]) -> None:

@@ -28,7 +28,7 @@ class FoPostSettings(BaseSettings):
 
     api_key: str | None = Field(
         default=None,
-        description="API key from https://app.fopost.com/api-keys, sent as X-API-Key.",
+        description="API key from https://fopost.com/dashboard/api-keys, sent as X-API-Key.",
     )
     base_url: str = Field(
         default=DEFAULT_BASE_URL,
