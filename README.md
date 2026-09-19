@@ -102,6 +102,8 @@ async def create(fopost: FoPostDep, settings: FoPostSettingsDep):
 
 `run_fopost` is a thin wrapper over `fastapi.concurrency.run_in_threadpool`. Never call the SDK
 straight from an `async def` route: a 30-second timeout would block every other request.
+`client.media.upload_direct` is blocking too (it presigns, PUTs the bytes, then completes), so
+it goes through `run_fopost()` like every other call.
 
 ## Receiving webhooks
 
