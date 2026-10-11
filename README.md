@@ -146,6 +146,37 @@ app.include_router(router, prefix="/fopost")
 `sign_payload(body, secret)` and `verify_webhook_signature(body, header, secret)` are exported
 if you need to verify a delivery somewhere else.
 
+## Receive blog articles
+
+A post goes to a social network; an article goes to a website. When FoPost publishes an article
+to a **Website** target it sends the article to your URL, signed with the website secret shown
+once in the blog settings. Mount the receiver in one line:
+
+```python
+from fopost import ArticlePublishedPayload
+from fopost_fastapi import article_router
+
+app.include_router(article_router(secret=WEBSITE_SECRET, on_article_published=store_article))
+```
+
+The callback gets the typed article and may return the URL you published it at:
+
+```python
+async def store_article(article: ArticlePublishedPayload) -> str:
+    await db.articles.upsert(slug=article.slug, html=article.body_html, tags=article.tags)
+    return f"https://yourbrand.com/blog/{article.slug}"
+```
+
+A `def` callback works too and runs in a worker thread. Point the Website target at
+`https://<your host>/articles` (`path=` changes it). The route reads the raw body, verifies it
+through `fopost.webhooks.verify` (`X-FoPost-Signature-256` over `timestamp.body`, 300 s
+tolerance), answers **401** on a bad or stale signature, `{"ok": true}` for `article.test`, and
+echoes a returned URL as `{"url": "..."}`. Image URLs in the payload expire after six hours, so
+download your own copy.
+
+`fopost.blog` on the injected client plans keywords, requests articles and publishes them; see the
+[`fopost` SDK](https://github.com/fopost/fopost-python#blog).
+
 ## Error handling
 
 `install_exception_handlers(app)` turns an SDK exception into the status the FoPost API actually
@@ -167,8 +198,8 @@ honouring `Retry-After`, before the error ever reaches the handler.
 ## The rest of the API
 
 Everything you can call on the injected client — `posts`, `accounts`, `workspaces`, `labels`,
-`ai`, and the `request()` escape hatch for endpoints the SDK does not wrap — is documented in the
-[`fopost` SDK](https://github.com/fopost/fopost-python). This package adds no resources of its own
+`ai`, `blog`, and the `request()` escape hatch for endpoints the SDK does not wrap — is documented
+in the [`fopost` SDK](https://github.com/fopost/fopost-python). This package adds no resources of its own
 and stores nothing.
 
 ## Example
