@@ -25,6 +25,7 @@ a worker thread by FastAPI; from an ``async def`` route, wrap the call in
 from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as _pkg_version
 
+from .articles import ArticleCallback, article_router
 from .client import (
     STATE_ATTR,
     FoPostDep,
@@ -59,6 +60,7 @@ except PackageNotFoundError:  # running from a source tree
 
 __all__ = [
     "ANY_EVENT",
+    "ArticleCallback",
     "DELIVERY_HEADER",
     "EVENT_HEADER",
     "SIGNATURE_HEADER",
@@ -70,6 +72,7 @@ __all__ = [
     "FoPostWebhookRouter",
     "WebhookEvent",
     "__version__",
+    "article_router",
     "create_client",
     "fopost_exception_handler",
     "fopost_lifespan",

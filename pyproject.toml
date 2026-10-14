@@ -34,7 +34,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "fopost>=0.1,<1.0",
+  "fopost>=0.3,<1.0",
   "fastapi>=0.110",
   "pydantic>=2",
   "pydantic-settings>=2",

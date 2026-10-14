@@ -27,7 +27,9 @@ It also stores nothing: no database models, no ORM, no migrations.
 `fopost` is **published on PyPI**, so `pip install -e '.[dev]'` resolves it normally. No
 CI-from-source shim is needed.
 
-`pyproject.toml` declares `fopost>=0.1,<1.0`.
+`pyproject.toml` declares `fopost>=0.3,<1.0`. While a parent feature is unreleased, CI installs
+`fopost` from its git branch in a step before `pip install -e '.[dev]'`; drop that step once the
+release tag is on PyPI.
 
 **Python floor.** The parent `fopost` requires Python **3.10+**, so this package declares
 `requires-python = ">=3.10"` and the CI matrix runs 3.10–3.13. Declaring 3.9 would ship a package
@@ -59,6 +61,7 @@ src/fopost_fastapi/
   concurrency.py    run_fopost — the threadpool bridge
   errors.py         fopost_exception_handler / install_exception_handlers
   webhooks.py       FoPostWebhookRouter, on_event, signature verification
+  articles.py       article_router — Website-target receiver over fopost.webhooks.verify
 ```
 
 **Client lifetime.** One `Fopost` per process, not per request. `setup_fopost(app)` wraps
