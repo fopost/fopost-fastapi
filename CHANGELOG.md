@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 - 2026-10-18
 
 - `article_router(secret, on_article_published)`: receive `article.published` deliveries from a
   Website blog target, verified through `fopost.webhooks.verify`; 401 on a bad signature,
